@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Chat with Notes 🤖</h2>
+
+<input id="query" placeholder="Type something">
+<button onclick="send()">Ask</button>
+
+<p id="res"></p>
+
+<script>
+function send() {
+  const query = document.getElementById("query").value;
+
+  fetch("http://localhost:3000/ask", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify({ query })
+  })
+  .then(r => r.json())
+  .then(d => {
+    document.getElementById("res").innerText = d[0].content;
+  });
+}
+</script>
+
+</body>
+</html>
